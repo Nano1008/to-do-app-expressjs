@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -8,7 +9,9 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-mongoose.connect("mongodb+srv://admin-sinan:Shisinan123@cluster0.agulypt.mongodb.net/todolistDB?retryWrites=true&w=majority");
+
+url = "mongodb+srv://admin-sinan:"+ process.env.KEY + "@cluster0.agulypt.mongodb.net/todolistDB?retryWrites=true&w=majority";
+mongoose.connect(url);
 
 // create an item Schema, an item model and three item documents
 const itemSchema = new mongoose.Schema({
